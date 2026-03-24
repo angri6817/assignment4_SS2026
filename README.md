@@ -1,0 +1,1 @@
+Henriette og Andrea - andre lekse for modul 2 Javascript
