@@ -85,6 +85,13 @@ function displayMealData(meal) {
         list.appendChild(li);
       }
     }
+
+    //la til if-setning for Youtubevideo i meal (om det finst displayer siden det)
+    if(meal.strYoutube) {
+      const videoId=meal.strYoutube.split("v=")[1];
+      const embedUrl="https://www.youtube.com/embed/"+videoId;
+      document.getElementById("mealYoutube").src=embedUrl;
+    }
 }
 
 /*
