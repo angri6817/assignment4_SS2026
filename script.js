@@ -105,7 +105,17 @@ If no cocktails found, fetch random
 */
 
 function fetchCocktailByDrinkIngredient(drinkIngredient) {
-    // Fill in
+  return fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + encodeURIComponent(drinkIngredient))
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+
+      if (data.drinks && data.drinks.length > 0) {
+        return data.drinks[0];
+      } else {
+        return fetchRandomCocktail();
+      }
+    });
 }
 
 /*
@@ -113,16 +123,35 @@ Fetch a Random Cocktail (backup in case nothing is found by the search)
 Returns a Promise that resolves to cocktail object
 */
 function fetchRandomCocktail() {
-    return fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
-      .then((response) => response.json())
-      .then((data) => data.drinks[0]);
+  return fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+
+      return data.drinks[0];
+    });
 }
 
 /*
 Display Cocktail Data in the DOM
 */
 function displayCocktailData(cocktail) {
-    // Fill in
+  const cocktailContainer = document.getElementById("cocktail-container");
+
+  let ingredients ="";
+  for (let i = 1; i <= 15; i++) {
+    if (cocktail["strIngredient" + i]) {
+      ingredients += "<li>" + cocktail["strIngredient" + i] + "</li>";
+    }
+  }
+
+  cocktailContainer.innerHTML =
+  "<h2>" + cocktail.strDrink + "</h2>" +
+  "<img src='" + cocktail.strDrinkThumb + "' alt='" + cocktail.strDrink + "'>" +
+  "<h3> Ingredients: </h3>" +
+  "<ul>" + ingredients + "</ul>" +
+  "<h3> Instructions: </h3>" +
+  "<p>" + cocktail.strInstructions + "</p>";
 }
 
 /*
