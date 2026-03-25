@@ -67,12 +67,12 @@ Receives a meal object with fields like:
 */
 function displayMealData(meal) {
     let mealName=document.getElementById("mealName").textContent=meal.strMeal;      //henter ut element fra HTML fil for å fylle ut detaljer om måltidet
-    let image=document.getElementById("image").src=meal.strMealThumb;
-    let category=document.getElementById("category").textContent=meal.strCategory;
-    let instructions=document.getElementById("instructions").textContent=meal.strInstructions;
+    let mealImage=document.getElementById("mealImage").src=meal.strMealThumb;
+    let category=document.getElementById("category").textContent="Category: " + meal.strCategory;
+    let instructions=document.getElementById("mealInstructions").textContent=meal.strInstructions;
 
     //loop for ingrediender
-    let list=document.getElementById("ingredientsList");
+    let list=document.getElementById("mealIngredientsList");
     list.innerHTML="";
 
     for(let i=1; i<=20; i++) {
