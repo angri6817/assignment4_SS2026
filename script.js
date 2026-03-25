@@ -49,7 +49,14 @@ Fetch a Random Meal from TheMealDB
 Returns a Promise that resolves with the meal object
  */
 function fetchRandomMeal() {
-    // Fill in
+    return fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      const meal=data.meals[0];
+      return meal;
+    });
 }
 
 /*
@@ -59,7 +66,25 @@ Receives a meal object with fields like:
   strIngredientX, strMeasureX, etc.
 */
 function displayMealData(meal) {
-    // Fill in
+    let mealName=document.getElementById("mealName").textContent=meal.strMeal;      //henter ut element fra HTML fil for å fylle ut detaljer om måltidet
+    let image=document.getElementById("image").src=meal.strMealThumb;
+    let category=document.getElementById("category").textContent=meal.strCategory;
+    let instructions=document.getElementById("instructions").textContent=meal.strInstructions;
+
+    //loop for ingrediender
+    let list=document.getElementById("ingredientsList");
+    list.innerHTML="";
+
+    for(let i=1; i<=20; i++) {
+      const ingredient=meal["strIngredient"+i];
+      const measure=meal["strMeasure"+i];
+
+      if(ingredient && ingredient!=="") {
+        const li= document.createElement("li");
+        li.textContent=ingredient+" - "+measure;
+        list.appendChild(li);
+      }
+    }
 }
 
 /*
@@ -78,6 +103,7 @@ We call https://www.thecocktaildb.com/api/json/v1/1/search.php?s=DRINK_INGREDIEN
 Don't forget encodeURIComponent()
 If no cocktails found, fetch random
 */
+
 function fetchCocktailByDrinkIngredient(drinkIngredient) {
     // Fill in
 }
