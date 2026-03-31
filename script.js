@@ -9,7 +9,7 @@ const mealCategoryToCocktailIngredient = {
   Lamb: "vodka",
   Miscellaneous: "vodka",
   Pasta: "tequila",
-  Pork: "tequila",
+  Pork: "tequila",  
   Seafood: "rum",
   Side: "brandy",
   Starter: "rum",
